@@ -9,18 +9,12 @@ import random
 import time
 
 
-def vote():
-    option = webdriver.ChromeOptions()
-    option.add_argument("-incognito")
-
-    browser = webdriver.Chrome(options=option)
-
+def vote(browser):
     browser.get("https://docs.google.com/forms/d/e/1FAIpQLSd_OjNQweI8xzyS8lCZUDX6Kb6hzOXYPuHxtTHNL9kdB2PZew/viewform")
     radiobuttons = browser.find_elements(By.CLASS_NAME, "docssharedWizToggleLabeledContainer")
 
     for button in radiobuttons:
         if "emma" in button.text.lower():
-            print(button)
             button.click()
 
     try:
@@ -32,9 +26,17 @@ def vote():
     time.sleep(0.5)
 
 def main():
+    option = webdriver.ChromeOptions()
+    option.add_argument("-incognito")
+    option.add_argument("headless")
+
+    browser = webdriver.Chrome(options=option)
+    vote_count = 1
     while True:
         # time.sleep(random.randrange(1, 3))
-        vote()
+        vote(browser=browser)
+        print(f"Voted {vote_count} times!")
+        vote_count += 1
 
 
 if __name__ == "__main__":
