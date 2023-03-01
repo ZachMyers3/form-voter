@@ -29,11 +29,11 @@ def vote():
     except Exception as e:
         print(str(e))
     
-    time.sleep(1)
+    time.sleep(0.5)
 
 def main():
     while True:
-        time.sleep(random.randrange(2, 5))
+        # time.sleep(random.randrange(1, 3))
         vote()
 
 
