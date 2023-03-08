@@ -10,20 +10,27 @@ import time
 
 
 def vote(browser):
-    browser.get("https://docs.google.com/forms/d/e/1FAIpQLSd_OjNQweI8xzyS8lCZUDX6Kb6hzOXYPuHxtTHNL9kdB2PZew/viewform")
-    radiobuttons = browser.find_elements(By.CLASS_NAME, "docssharedWizToggleLabeledContainer")
+    browser.get(
+        "https://docs.google.com/forms/d/e/1FAIpQLSeMX8Yr9UVZw75yznGQOM8Dfp7XmHDfFvS_VShMx-gvQoTv-Q/viewform"
+    )
+    radiobuttons = browser.find_elements(
+        By.CLASS_NAME, "docssharedWizToggleLabeledContainer"
+    )
 
     for button in radiobuttons:
-        if "emma" in button.text.lower():
+        if "addy" in button.text.lower():
             button.click()
 
     try:
-        submit = WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Submit']")))
-        submit.click() #this sometimes works but if so only once
+        submit = WebDriverWait(browser, 20).until(
+            EC.element_to_be_clickable((By.XPATH, "//span[text()='Submit']"))
+        )
+        submit.click()  # this sometimes works but if so only once
     except Exception as e:
         print(str(e))
-    
+
     time.sleep(0.5)
+
 
 def main():
     option = webdriver.ChromeOptions()
